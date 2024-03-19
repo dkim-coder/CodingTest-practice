@@ -1,12 +1,12 @@
-#include <iostream>
 #include <string>
 #include <vector>
-#include <cmath>
+#include <iostream>
+#include <math.h>
 #include <algorithm>
+#include <unordered_set>
 
 using namespace std;
 
-// 소수 판별 여부 함수 필요
 bool isPrime(int num)
 {
     if (num <= 1)
@@ -15,30 +15,34 @@ bool isPrime(int num)
     for (int i = 2; i <= sqrt(num); i++)
     {
         if (num % i == 0)
+        {
             return false;
+        }
     }
-
     return true;
 }
 
 int solution(string numbers)
 {
     int answer = 0;
-    vector<int> vec_numbers(numbers.length(), 0);
-    vector<int> check(numbers.length(), 0);
+    unordered_set<int> nums;
 
-    for (auto i : numbers)
-        vec_numbers.push_back(atoi(i));
+    sort(numbers.begin(), numbers.end());
 
-    for (int i = 1; i <= vec_numbers.size(); i++)
+    do
     {
-        vector<int> vec_tmp_numbers;
-        do
+        for (int i = 1; i <= numbers.size(); i++)
         {
+            string temp = numbers.substr(0, i);
+            int num_temp = stoi(temp);
+            if (isPrime(num_temp))
+            {
+                nums.insert(num_temp);
+            }
         }
-    }
+    } while (next_permutation(numbers.begin(), numbers.end()));
 
-    return answer;
+    return nums.size();
 }
 
 int main()
@@ -47,7 +51,6 @@ int main()
     string numbers_2 = "001";
 
     cout << solution(numbers_1) << endl;
-    cout << solution(numbers_2) << endl;
 
     return EXIT_SUCCESS;
 }
