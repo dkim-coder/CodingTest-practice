@@ -24,25 +24,22 @@ bool isPrime(int num)
 
 int solution(string numbers)
 {
-    int answer = 0;
-    unordered_set<int> nums;
+    unordered_set<int> us;  // 중복은 제거되는 세트 
 
     sort(numbers.begin(), numbers.end());
 
     do
     {
-        for (int i = 1; i <= numbers.size(); i++)
+        for (int i = 0; i < numbers.length(); i++)
         {
-            string temp = numbers.substr(0, i);
-            int num_temp = stoi(temp);
-            if (isPrime(num_temp))
-            {
-                nums.insert(num_temp);
-            }
+            string tmp = numbers.substr(0, i + 1);  // 스트링의 서브 스트링 반환해주는 함수
+            int num = stoi(tmp);    // 스트링 정수로 반환 해주는 함수
+            if (isPrime(num))
+                us.insert(num);
         }
     } while (next_permutation(numbers.begin(), numbers.end()));
 
-    return nums.size();
+    return us.size();
 }
 
 int main()
