@@ -34,7 +34,7 @@ long long solution(int n, vector<int> times)
     long long end = *(times.end() - 1) * static_cast<long long>(n);
     long long mid;
 
-    while (start <= end)    // 이분 탐색 종료 조건
+    while (start <= end)
     {
         mid = (start + end) / 2;
         bool res = isCan(n, times, mid);
