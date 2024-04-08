@@ -22,7 +22,7 @@ long long bfs(long long A, long long B)
         if(num > B) continue;
 
         q.push({num * 10 + 1, cnt + 1});
-        q.push({num * 2, cnt + 1});
+        q.push({num << 1, cnt + 1});
     }
 
     return res;
