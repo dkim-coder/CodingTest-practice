@@ -1,27 +1,49 @@
 #include <iostream>
-#include <string>
 #include <vector>
 
 using namespace std;
 
-/*
-{4, 3} 4번 선수가 3번 선수를 이긴 것을 뜻함
-정확히 등수를 판단할 수 있는 기준이 필요함
-1 명이 확실하게 정해지면 어떻게 되지
-*/
-
-int solution(int n, vector<vector<int>> results)
+int solution(int n, vector<vector<bool>> &b_results) // 플로이드 알고리즘의 변형
 {
-    int answer = 0;
-    return answer;
+    int res = 0;
+
+    // O(n^3)
+    for (int i = 1; i <= n; i++)
+    {
+        for (int win = 1; win <= n; win++)
+        {
+            for (int lose = 1; lose <= n; lose++)
+            {
+                if (b_results[win][i] && b_results[i][lose])
+                    b_results[win][lose] = true;    // 이긴 정보를 그래프에 축적
+            }
+        }
+    }
+
+    for (int i = 1; i <= n; i++)
+    {
+        int cnt = 0;
+        for (int j = 1; j <= n; j++)
+        {
+            if (b_results[i][j] || b_results[j][i]) 
+                cnt++;
+        }   
+        if (cnt == n - 1)   // 정보가 n - 1 개 모두 있는거 파악
+            res++;
+    }
+
+    return res;
 }
 
 int main()
 {
     int n = 5;
     vector<vector<int>> results = {{4, 3}, {4, 2}, {3, 2}, {1, 2}, {2, 5}};
+    vector<vector<bool>> b_results(n + 1, vector<bool>(n + 1, false));
+    for (int i = 0; i < results.size(); i++)
+        b_results[results[i][0]][results[i][1]] = true;
 
-    cout << "Answer : " << solution(n, results) << endl;
+    cout << solution(n, b_results) << endl;
 
     return EXIT_SUCCESS;
 }
