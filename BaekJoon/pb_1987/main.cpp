@@ -76,28 +76,30 @@ int main()
             cout << 1 << endl;
             return 0;
         }
-    }else if(r > 1 && c == 1)
+    }
+    else if (r > 1 && c == 1)
     {
-        if(matrix[0][0] == matrix[1][0])
+        if (matrix[0][0] == matrix[1][0])
         {
             cout << 1 << endl;
             return 0;
         }
-    }else if(r == 1 && c > 1)
+    }
+    else if (r == 1 && c > 1)
     {
-        if(matrix[0][0] == matrix[0][1])
+        if (matrix[0][0] == matrix[0][1])
         {
             cout << 1 << endl;
             return 0;
         }
-    }else if(r == 1 && c == 1)
+    }
+    else if (r == 1 && c == 1)
     {
         cout << 1 << endl;
         return 0;
     }
 
     dfs(0, 0);
-
 
     cout << res << endl;
 

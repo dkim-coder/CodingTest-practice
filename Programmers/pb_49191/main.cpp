@@ -14,7 +14,7 @@ int solution(int n, vector<vector<bool>> &b_results) // 플로이드 알고리�
         {
             for (int lose = 1; lose <= n; lose++)
             {
-                if (b_results[win][i] && b_results[i][lose])
+                if (b_results[win][i] && b_results[i][lose])    // win 이 i 를 이기고, i 가 lose 를 이기면 win 이 lose 를 이긴다는 정보를 축적해 나가는것
                     b_results[win][lose] = true;    // 이긴 정보를 그래프에 축적
             }
         }
