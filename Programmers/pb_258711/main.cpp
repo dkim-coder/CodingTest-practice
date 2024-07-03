@@ -4,40 +4,30 @@
 
 using namespace std;
 
-#define MAX 1000002
-#define Out first
-#define In second
-
-pair<int, int> InOutcheck[MAX] = {};
-
-int maxNode = -1;
-
-/*
-TODO : 풀이 해설 작성 필요
-*/
-
-vector<int> solution(vector<vector<int>> edges) 
+vector<int> solution(vector<vector<int>> edges)
 {
     vector<int> answer(4, 0);
+    vector<pair<int, int>> in_out_cnt(1000001, {0, 0});    // index -> node_num | first -> in, second -> out
+    int node_num = 0;
 
-    for (int i = 0; i < edges.size(); i++)
+    for(const auto &e : edges)
     {
-        InOutcheck[edges[i][0]].Out++;  // 노드에서 나가는 간선의 수
-        InOutcheck[edges[i][1]].In++;   // 노드로 들어오는 간선의 수
-        maxNode = max(maxNode, max(edges[i][0], edges[i][1]));  // 총 노드 개수
+        in_out_cnt[e[0]].second++;
+        in_out_cnt[e[1]].first++;
+        node_num = max(node_num, max(e[0], e[1]));
     }
 
-    for (int i = 1; i <= maxNode; i++)
+    for(int i = 1; i <= node_num; i++)
     {
-        if (InOutcheck[i].Out >= 2 && InOutcheck[i].In == 0)    // 나가는 간선이 2개 이상, 들어오는 간선이 0개
+        if(in_out_cnt[i].first == 0 && in_out_cnt[i].second >= 2)   // addition node
             answer[0] = i;
-        else if (InOutcheck[i].Out == 0 && InOutcheck[i].In >= 1)
+        else if(in_out_cnt[i].first >= 1 && in_out_cnt[i].second == 0)  // 막대 그래프
             answer[2]++;
-        else if (InOutcheck[i].Out >= 2 && InOutcheck[i].In >= 2)   // 나가고 들어오는개 2개 모두 2개 이상 8 자
+        else if(in_out_cnt[i].first >= 2 && in_out_cnt[i].second == 2)  // 8자
             answer[3]++;
     }
 
-    answer[1] = InOutcheck[answer[0]].Out - (answer[2] + answer[3]);
+    answer[1] = in_out_cnt[answer[0]].second - answer[2] - answer[3];
 
     return answer;
 }
