@@ -4,13 +4,11 @@
 
 using namespace std;
 
+#if 0
 #define DUMMY -1
 
 int g_res = 0;
 
-// 0, 1, 2 ,3  -> 2는 대신 삼각형이 아니면 불가
-
-// #if 0,.
 bool isDone(int n, vector<int> tops, vector<int> v)
 {
     for (int i = 0; i < n; i++)
@@ -36,7 +34,6 @@ bool isDone(int n, vector<int> tops, vector<int> v)
     }
     return true;
 }
-// #endif
 
 void dfs(int n, vector<int> tops, vector<int> cur)
 {
@@ -97,6 +94,27 @@ int solution(int n, vector<int> tops)
     dfs(n, tops, cur);
 
     answer = g_res % 10007;
+
+    return answer;
+}
+#endif
+
+int solution(int n, vector<int> tops)
+{
+    int answer = 0;
+    int MOD = 10007;
+    vector<int> dp1(n, 0);
+    vector<int> dp2(n, 0);
+    dp1[0] = 1;
+    dp2[0] = 2 + tops[0];
+
+    for (int i = 1; i < n; i++)
+    {
+        dp1[i] = (dp1[i - 1] + dp2[i - 1]) % MOD;
+        dp2[i] = ((dp1[i - 1] * (1 + tops[i])) + (dp2[i - 1] * (2 + tops[i]))) % MOD;
+    }
+
+    answer = (dp1.back() + dp2.back()) % MOD;
 
     return answer;
 }
