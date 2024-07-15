@@ -1,0 +1,13 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/dh/Projects/CodingTest-practice/Programmers/pb_250135/main'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: __Z8solutioniiiiii, symObjAddr: 0x0, symBinAddr: 0x1000039D0, symSize: 0x354 }
+  - { offsetInCU: 0x467B, offset: 0x467B, size: 0x8, addend: 0x0, symName: __ZNSt3__14endlB8ue170006IcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_, symObjAddr: 0x404, symBinAddr: 0x100003DD4, symSize: 0x58 }
+  - { offsetInCU: 0x46BB, offset: 0x46BB, size: 0x8, addend: 0x0, symName: __ZNSt3__19use_facetB8ue170006INS_5ctypeIcEEEERKT_RKNS_6localeE, symObjAddr: 0x4E0, symBinAddr: 0x100003EB0, symSize: 0x2C }
+  - { offsetInCU: 0x7176, offset: 0x7176, size: 0x8, addend: 0x0, symName: __Z8solutioniiiiii, symObjAddr: 0x0, symBinAddr: 0x1000039D0, symSize: 0x354 }
+  - { offsetInCU: 0x727C, offset: 0x727C, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x354, symBinAddr: 0x100003D24, symSize: 0x84 }
+  - { offsetInCU: 0x7397, offset: 0x7397, size: 0x8, addend: 0x0, symName: __ZNSt3__113basic_ostreamIcNS_11char_traitsIcEEElsB8ue170006EPFRS3_S4_E, symObjAddr: 0x3D8, symBinAddr: 0x100003DA8, symSize: 0x2C }
+  - { offsetInCU: 0x73C9, offset: 0x73C9, size: 0x8, addend: 0x0, symName: __ZNKSt3__19basic_iosIcNS_11char_traitsIcEEE5widenB8ue170006Ec, symObjAddr: 0x45C, symBinAddr: 0x100003E2C, symSize: 0x84 }
+  - { offsetInCU: 0x7435, offset: 0x7435, size: 0x8, addend: 0x0, symName: __ZNKSt3__15ctypeIcE5widenB8ue170006Ec, symObjAddr: 0x50C, symBinAddr: 0x100003EDC, symSize: 0x38 }
+...
