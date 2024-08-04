@@ -1,0 +1,13 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/dh/Projects/CodingTest-practice/BaekJoon/pb_14501/main'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: __Z8solutionv, symObjAddr: 0x0, symBinAddr: 0x100003D3C, symSize: 0x118 }
+  - { offsetInCU: 0x3F, offset: 0x3F, size: 0x8, addend: 0x0, symName: _n, symObjAddr: 0x5B64, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offsetInCU: 0x5B, offset: 0x5B, size: 0x8, addend: 0x0, symName: _t, symObjAddr: 0x5B65, symBinAddr: 0x100008001, symSize: 0x0 }
+  - { offsetInCU: 0x83, offset: 0x83, size: 0x8, addend: 0x0, symName: _p, symObjAddr: 0x5B78, symBinAddr: 0x100008014, symSize: 0x0 }
+  - { offsetInCU: 0xAB, offset: 0xAB, size: 0x8, addend: 0x0, symName: _dp, symObjAddr: 0x5BB8, symBinAddr: 0x100008054, symSize: 0x0 }
+  - { offsetInCU: 0x2EB2, offset: 0x2EB2, size: 0x8, addend: 0x0, symName: __Z8solutionv, symObjAddr: 0x0, symBinAddr: 0x100003D3C, symSize: 0x118 }
+  - { offsetInCU: 0x2F08, offset: 0x2F08, size: 0x8, addend: 0x0, symName: __Z3MAXii, symObjAddr: 0x118, symBinAddr: 0x100003E54, symSize: 0x48 }
+  - { offsetInCU: 0x2F42, offset: 0x2F42, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x160, symBinAddr: 0x100003E9C, symSize: 0xCC }
+...
