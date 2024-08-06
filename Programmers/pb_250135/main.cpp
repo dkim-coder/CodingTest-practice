@@ -8,7 +8,7 @@ int solution(int h1, int m1, int s1, int h2, int m2, int s2)
 {
     int answer = 0;
 
-    int start = h1 * 3600 + m1 * 60 + s1;
+    int start = h1 * 3600 + m1 * 60 + s1;   // 초로 변환
     int end = h2 * 3600 + m2 * 60 + s2;
 
     if (start % 360 == 0 || start % 360 == 12)
