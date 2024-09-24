@@ -1,5 +1,12 @@
 {
     "files.associations": {
-        "ios": "cpp"
+        "ios": "cpp",
+        "map": "cpp",
+        "__config": "cpp",
+        "istream": "cpp",
+        "iterator": "cpp",
+        "locale": "cpp",
+        "memory": "cpp",
+        "string": "cpp"
     }
 }
