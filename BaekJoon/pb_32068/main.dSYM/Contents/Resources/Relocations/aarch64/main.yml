@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/dh/Projects/CodingTest-practice/BaekJoon/pb_32068/main'
+relocations:     []
+...
