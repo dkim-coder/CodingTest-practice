@@ -53,7 +53,7 @@ template<typename T>
 void Solution<T>::solution()
 {
     // 10, 20, 50, 60, 30, 40, 70
-    vector<int> dp(this->N, 1);
+    vector<T> dp(this->N, static_cast<T>(1));
     for (int i = 1; i < this->N; ++i) {
         for (int j = 0; j < i; ++j) {
             if (this->arr[i] > this->arr[j]) {
