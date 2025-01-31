@@ -14,8 +14,9 @@ namespace my
     {
     private:
         T number;
-        using method_ptr = T (Solution<T>::*)(const T n) const;
-        static const method_ptr methods[METHOD_NUM];
+        // using method_ptr = T (Solution<T>::*)(const T) const;
+        // static const method_ptr methods[METHOD_NUM];
+        static T (Solution<T>::*const methods[METHOD_NUM])(const T) const;
 
     public:
         Solution() = default;
@@ -27,8 +28,12 @@ namespace my
         void solve() const;
     };
 
+    // template <typename T>
+    // const typename Solution<T>::method_ptr Solution<T>::methods[METHOD_NUM] = {&Solution<T>::div_2, &Solution<T>::div_3, &Solution<T>::minus_1};
+
     template <typename T>
-    const typename Solution<T>::method_ptr Solution<T>::methods[METHOD_NUM] = {&Solution<T>::div_2, &Solution<T>::div_3, &Solution<T>::minus_1};
+    T (Solution<T>::*const Solution<T>::methods[METHOD_NUM])(const T) const = {&Solution<T>::div_2, &Solution<T>::div_3, &Solution<T>::minus_1};
+
 
     template <typename T>
     void Solution<T>::input()
