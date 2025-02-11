@@ -51,7 +51,7 @@ namespace permutation
 
         for (int i = 0; i < SIZE; i++)
         {
-            if (flag & 1 << i) // 해당 비트가 1이면 방문했다는 의미
+            if (flag & (1 << i)) // 해당 비트가 1이면 방문했다는 의미
                 continue;
             output[cnt] = arr[i];                  // 현재 원소를 뽑아온다.
             permute2(cnt + 1, r, flag | (1 << i)); // 다음 원소를 뽑으러 재귀 호출 및 비트 값으로 방문 표시
