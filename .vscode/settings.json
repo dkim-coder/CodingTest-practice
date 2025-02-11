@@ -54,6 +54,11 @@
         "typeinfo": "cpp",
         "unordered_map": "cpp",
         "variant": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "concepts": "cpp",
+        "functional": "cpp",
+        "utility": "cpp",
+        "set": "cpp",
+        "unordered_set": "cpp"
     }
 }
