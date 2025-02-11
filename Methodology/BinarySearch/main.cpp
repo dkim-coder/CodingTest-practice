@@ -2,7 +2,7 @@
 
 #define SIZE 10
 
-
+// 이분 탐색 구현
 namespace binarysearch{
     using namespace std;
 
