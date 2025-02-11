@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/donghyeon/Projects/CodingTest-practice/Methodology/BinarySearch/main'
+relocations:     []
+...
