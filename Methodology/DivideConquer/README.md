@@ -1,5 +1,5 @@
 # Divide and Conquer
-크고 방대한 문제를 조금씩 조금씩 나눠가면서 용이하게 풀 수 있는 문제 단위로 나눈 다음 그것들을 다시 합쳐 해결하자는 개념										
+큰 문제를 분할해가면서 용이하게 풀 수 있는 문제 단위로 나눈 다음 그것들을 다시 해결하고 합치는 개념										
 ## Approach
 1. Divide
     - 문제를 더 이상 분할할 수 없을 때까지 동일한 유형의 여러 sub-problem 으로 쪼갬.
@@ -13,7 +13,7 @@
 ```cpp
 function(problem){
     if(problem 이 더 이상 분할 불가능){
-        problem 해결
+        problem 해결    
         return 결과
     }
     else{
@@ -24,4 +24,3 @@ function(problem){
     }
 }
 ```
-
