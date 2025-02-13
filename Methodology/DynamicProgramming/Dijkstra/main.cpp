@@ -41,7 +41,7 @@ void dijkstra(int start)
         int current = pq.top().second;
         pq.pop();
 
-        if (current_dist > dist[current])   // 현재 노드가 이미 더 짧은 경로를 가지고 있다면 처리할 필요 없음
+        if (current_dist > dist[current])   // 최소 힙에서 꺼낸 정점이 최소 거리를 가지는 정점이 아니라면 무시한다는 뜻
             continue;
 
         for (auto &edge : graph[current])
