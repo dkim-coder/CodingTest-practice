@@ -7,14 +7,14 @@
 using namespace std;
 
 int n, m, x;
-vector<vector<pair<int, int>>> graph; // 인접 리스트로 방향 엣지와 가중치를 나타냄
+vector<vector<pair<int, int>>> graph; // 인접리스트 사용, < 연결 노드, 가중치 >
 vector<int> dist;                    // 출발 노드에서 도착 노드까지 최단 거리를 기록하는 벡터
 
 void input()
 {
     cin >> n >> m >> x;
     graph.resize(n + 1);
-    dist.resize(n + 1, INT_MAX);
+    dist.resize(n + 1);
 
     int start, target, weight;
     for (int i = 0; i < m; i++)
@@ -24,13 +24,16 @@ void input()
     }
 }
 
-// 최단거리 구하기 위한 다익스트라 알고리즘
+// 다익스트라 알고리즘: 최단거리 구하는 알고리즘으로 그리디와 다이나믹 프로그래밍을 결합
+// 그리디 요소: 방문되지 않은 노드중에서 현재까지 이동 가중치가 가장 낮은 노드를 선택
+//  - 즉, 최단 거리를 구하기 위해서는 지속적으로 최단 경로로 이동한다는 개념을 기반함
+// 다이나믹 프로그래밍 요소: 다음 노드까지의 최단 거리를 계산할때 이전에 계산했던 값을 사용해서 업데이트 하기 때문
 void dijkstra(int start)
 {
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     fill(dist.begin(), dist.end(), INT_MAX);
     dist[start] = 0;    // 시작 정점 거리 0으로 초기화
-    pq.push({0, start});
+    pq.push({0, start});    // {노드까지의 최단 거리 값, 노드}
 
     while (!pq.empty())
     {
@@ -38,14 +41,14 @@ void dijkstra(int start)
         int current = pq.top().second;
         pq.pop();
 
-        if (current_dist > dist[current])
+        if (current_dist > dist[current])   // 현재 노드가 이미 더 짧은 경로를 가지고 있다면 처리할 필요 없음
             continue;
 
         for (auto &edge : graph[current])
         {
             int next = edge.first;
             int weight = edge.second;
-            if (dist[next] > dist[current] + weight)
+            if (dist[next] > dist[current] + weight)    // 다음 노드의 최단 거리 값이 현재 노드를 거쳐서 가는 것보다 크면 업데이트 후 힙에 삽입
             {
                 dist[next] = dist[current] + weight;
                 pq.push({dist[next], next});
