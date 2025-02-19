@@ -7,26 +7,34 @@ namespace segmenttree
 {
     using namespace std;
 
-    vector<int> arr;
-    vector<int> seg_tree;
+    vector<int> arr;      // 세그먼트 트리 구성에 사용될 배열
+    vector<int> seg_tree; // 세그먼트 트리 -> 세그먼트 트리는 인덱스 1부터 시작 -> 왜냐하면 이렇게 하면 왼쪽 자식 오른쪽 자식 노드의 인덱스를 계산하기 쉬움
+    // 예를 들어, 루트 노드의 인덱스 1, 루트 노드의 왼쪽 자식노드 인덱스 1 * 2, 루트 노드의 오른쪽 자식노드 인덱스 1 * 2 + 1
 
+    /**
+     * @brief 세그먼트 트리를 구성에 사용될 배열 값 세팅
+     * 
+     * @return void
+     */
     inline void setting()
     {
         arr.resize(SIZE);
         for (int i = 0; i < SIZE; i++)
-            arr[i] = rand() % 100; // Random integer between 0 and 99
-        seg_tree.resize(SIZE * 4, 0);
+            arr[i] = rand() % 100; // 0 ~ 99 까지의 정수형 난수 생성
+        seg_tree.resize(SIZE * 4, 0);   // 세그먼트 트리는 넉넉히 4를 곱해서 크기 생성
 
         return;
     }
-    /*
-    세그먼트 트리 구성
-    @param
-    start : 배열의 시작 인덱스
-    end : 배열의 끝 인덱스
-    idx : 세그먼트 트리 인덱스
+    /**
+    * @brief 세그먼트 트리 초기화
+    * 
+    * @param start 세그먼트 트리 구성에 사용될 배열의 시작 인덱스
+    * @param end 세그먼트 트리 구서에 사용될 배열 끝 인덱스
+    * @param idx 세그먼트 트리 노드 인덱스
+    * @return const int 세그먼트 노드 값
+    * @note 배열의 시작인덱스와 끝 인덱스 및 세그먼트 트리 시작 인덱스 세팅 주의
     */
-    int init(const int start, const int end, const int idx) // (구하고자 하는 배열 구간의 시작, 끝, 해당 값이 저장될 세그먼트 트리 인덱스)
+    const int init(const int start = 0, const int end, const int idx = 1) 
     {
         if (start == end)
         {
@@ -34,20 +42,22 @@ namespace segmenttree
             return seg_tree[idx]; // 세그먼트 트리 부모 노드 값 계산을 위해 반환
         }
 
-        int mid = (start + end) / 2; // 배열 인덱스 쪼갬
-        return seg_tree[idx] = init(start, mid, idx * 2) + init(mid + 1, end, idx * 2 + 1);
+        int mid = (start + end) / 2; // 배열 분할
+        return seg_tree[idx] = init(start, mid, idx * 2) + init(mid + 1, end, idx * 2 + 1); // 왼쪽 자식노드와 오른쪽 자식노드 값을 더해서 세그먼트 트리에 값 대입한다는 뜻
     }
 
-    /*
-    구간합 반환
-    @param
-    start : 현재 배열 구간의 시작 인덱스
-    end : 현재 배열 구간의 끝 인덱스
-    idx : 시작 인덱스와 끝 인덱스의 구간합 값이 저장되어 있는 세그먼트 트리 인덱스
-    left : 구간합을 구하고자 하는 배열 구간의 왼쪽 인덱스
-    right : 구간합을 구하고자 하는 배열 구간의 오른쪽 인덱스
-    */
-    int interval_sum(const int start, const int end, const int idx, const int left, const int right)
+    /**
+     * @brief 세그먼트 트리를 사용해서 배열의 구간 합 반환
+     * 
+     * @param start 배열의 시작 인덱스
+     * @param end 배열의 끝 인덱스
+     * @param idx 세그먼트 트리 인덱스
+     * @param left 배열의 구간합을 구할 왼쪽 인덱스
+     * @param right 배열의 구간합을 구한 오른쪽 인덱스
+     * @return int
+     * @note start, end 그리고 idx 값 초기 설정 주의
+     */
+    int interval_sum(const int start = 0, const int end, const int idx = 1, const int left, const int right)
     {
         if (left > end || right < start)
             return 0;
@@ -59,14 +69,14 @@ namespace segmenttree
         return interval_sum(start, mid, idx * 2, left, right) + interval_sum(mid + 1, end, idx * 2 + 1, left, right);
     }
 
-    /*
-    배열의 값이 바뀌면 해당 세그먼트 트리 업데이트 하는 함수
-    @param
-    start : 현재 보는 배열 시작 인덱스
-    end : 현재 보는 배열 끝 인덱스
-    idx : 현재 보는 배열의 구간 합 값을 가지고 있는 세그먼트 트리 인덱스
-    what : 구간 합을 수정하고자 하는 노드
-    value : 수정할 값 -> 얼마만큼 수정할 건지를 넣어주면 된다.
+    /**
+    * @brief 배열의 값을 수정했을 때 세그먼트 트리 업데이트 함수
+    *
+    * @param start : 현재 보는 배열 시작 인덱스
+    * @param end : 현재 보는 배열 끝 인덱스
+    * @param idx : 현재 보는 배열의 구간 합 값을 가지고 있는 세그먼트 트리 인덱스
+    * @param what : 구간 합을 수정하고자 하는 노드
+    * @return void
     */
     void update(const int start, const int end, const int idx, const int what, const int value)
     {
