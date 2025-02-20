@@ -8,10 +8,15 @@ using namespace std;
 using ll = long long;
 
 int N, M, K;
-vector<ll> arr;
-vector<ll> tree;
+vector<ll> arr;     // input array
+vector<ll> tree;    // segment tree
 vector<pair<int, pair<int, ll>>> query; // {1: UPDATE, 2: INTERAL_SUM}, {a, b}
 
+/**
+ * @brief input N, M, K, arr, query
+ * 
+ * @return void
+ */
 inline void input()
 {
     cin >> N >> M >> K;
@@ -32,6 +37,14 @@ inline void input()
     return;
 }
 
+/**
+ * @brief 세그먼트 트리 초기화
+ * 
+ * @param start 배열 시작 인덱스
+ * @param end 배열 끝 인덱스
+ * @param idx 세그먼트 트리 인덱스
+ * @return const long long 
+ */
 const ll initialize(const int start, const int end, const int idx)
 {
     if (start == end)
@@ -44,9 +57,19 @@ const ll initialize(const int start, const int end, const int idx)
     return tree[idx] = initialize(start, mid, idx * 2) + initialize(mid + 1, end, idx * 2 + 1);
 }
 
+/**
+ * @brief 세그먼트 트리 업데이트
+ * 
+ * @param start 배열 시작 인덱스
+ * @param end 배열 끝 인덱스
+ * @param idx 세그먼트 트리 인덱스
+ * @param target 배열의 업데이트 할 인덱스
+ * @param diff 이전 배열 값과 업데이트 되는 값의 차이
+ * @return void
+ */
 void update(const int start, const int end, const int idx, const int target, const ll diff)
 {
-    if (target < start || target > end)
+    if (target < start || target > end) // target이 범위 밖이면
         return;
 
     tree[idx] += diff;
@@ -61,6 +84,16 @@ void update(const int start, const int end, const int idx, const int target, con
     return;
 }
 
+/**
+ * @brief 배열의 부분합 구하기
+ * 
+ * @param start 배열의 시작 인덱스
+ * @param end 배열의 끝 인덱스
+ * @param idx 세그먼트 트리 인덱스
+ * @param left 부분 합 구할 왼쪽 인덱스
+ * @param right 부분 합 구할 오른쪽 인덱스
+ * @return const long long 
+ */
 const ll interval_sum(const int start, const int end, const int idx, const int left, const int right)
 {
     if (left > end || right < start)

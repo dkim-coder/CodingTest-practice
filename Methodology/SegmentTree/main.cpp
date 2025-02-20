@@ -34,7 +34,7 @@ namespace segmenttree
      * @return const int 세그먼트 노드 값
      * @note 배열의 시작인덱스와 끝 인덱스 및 세그먼트 트리 시작 인덱스 세팅 주의
      */
-    const int init(const int start = 0, const int end, const int idx = 1)
+    const int init(const int start, const int end, const int idx)
     {
         if (start == end)
         {
@@ -57,7 +57,7 @@ namespace segmenttree
      * @return int
      * @note start, end 그리고 idx 값 초기 설정 주의
      */
-    int interval_sum(const int start = 0, const int end, const int idx = 1, const int left, const int right)
+    int interval_sum(const int start, const int end, const int idx, const int left, const int right)
     {
         if (left > end || right < start)
             return 0;
@@ -80,7 +80,7 @@ namespace segmenttree
      * @return void
      * @note value 값을 세팅할 때는 수정하는 값을 직접대입하는 것이라니라 수정전에 비해 수정할 값이 얼만큼 변화하는지로 세팅
      */
-    void update(const int start = 0, const int end, const int idx = 1, const int what, const int value)
+    void update(const int start, const int end, const int idx, const int what, const int value)
     {
         if (what < start || what > end)
             return;
