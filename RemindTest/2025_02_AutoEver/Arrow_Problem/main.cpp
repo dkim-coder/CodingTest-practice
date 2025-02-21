@@ -46,6 +46,7 @@ int main()
     }
 
     // 배낭 문제 기반 풀이
+    // 배낭 문제와의 차이점이라면 점수가 정확히 일치해야한다는 점임
     vector<vector<int>> dp(M + 1, vector<int>(K + 1, INF));
     for (int i = 1; i <= M; i++) // 화살 번호
     {
