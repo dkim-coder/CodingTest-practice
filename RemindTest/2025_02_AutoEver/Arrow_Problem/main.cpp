@@ -112,6 +112,8 @@ namespace AutoEver
                     for (int k = 0; k < N * N; k++)
                         if (j - arrow_scores[i][k] >= 0)
                             dp[i][j] = min(dp[i - 1][j], dp[i - 1][j - arrow_scores[i][k]] + weights[i]); // INF, INF + weigths[i] 에는 INF가 저장되어 불가능을 뜻하게 됨
+                        else
+                            dp[i][j] = dp[i - 1][j];
             }
         }
 
