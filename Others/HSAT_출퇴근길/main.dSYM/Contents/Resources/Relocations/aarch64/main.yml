@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     "/Users/donghyeon/Projects/CodingTest-practice/Others/HSAT_출퇴근길/main"
+relocations:     []
+...
