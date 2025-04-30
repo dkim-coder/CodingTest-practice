@@ -7,78 +7,41 @@ using namespace std;
 
 static int n;
 static bool board[MAX][MAX];
-constexpr static int dx[] = {-1, 1, 0, 0, 1, 1, -1, -1};
-constexpr static int dy[] = {0, 0, -1, 1, 1, -1, 1, -1};
+static bool col[MAX], diag1[2 * MAX - 1], diag2[2 * MAX - 1];
 
-inline void init()
-{
+inline void init() {
     cin >> n;
     memset(board, false, sizeof(board));
-
-    return;
+    memset(col, false, sizeof(col));
+    memset(diag1, false, sizeof(diag1));
+    memset(diag2, false, sizeof(diag2));
 }
 
-const bool check(const int r, const int c)
-{
-    for(int i = 0; i < sizeof(dx) / sizeof(int); i++)
-    {
-        int cr = r;
-        int cc = c;
-        while(true)
-        {
-            cr += dx[i];
-            cc += dy[i];
-
-            if(cr < 0 || cr >= n || cc < 0 || cc >= n)
-                break;
-            
-            if(board[cr][cc])
-                return false;
-        }
-    }
-
-    return true;
-}
-
-void dfs(const int queen_count, int &ans)
-{
-    if (queen_count == n)
-    {
+void dfs(int queen_count, int &ans, int r) {
+    if (queen_count == n) {
         ans++;
         return;
     }
 
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (board[i][j])
-                continue;
+    for (int j = 0; j < n; j++) {
+        if (col[j] || diag1[r - j + n - 1] || diag2[r + j])
+            continue;
 
-            if (!check(i, j))
-                continue;
-
-            board[i][j] = true;
-            dfs(queen_count + 1, ans);
-            board[i][j] = false;
-        }
+        // 퀸 배치
+        col[j] = diag1[r - j + n - 1] = diag2[r + j] = true;
+        dfs(queen_count + 1, ans, r + 1);
+        // 복구
+        col[j] = diag1[r - j + n - 1] = diag2[r + j] = false;
     }
-
-    
-    return;
 }
 
-const int solve()
-{
+const int solve() {
     int ans = 0;
-
-    dfs(0, ans);
-
+    dfs(0, ans, 0);
     return ans;
 }
 
-int main(int argc, char **argv)
-{
+int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
