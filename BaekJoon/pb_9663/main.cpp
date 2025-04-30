@@ -7,7 +7,7 @@ using namespace std;
 
 static int n;
 static bool board[MAX][MAX];
-static bool col[MAX], diag1[2 * MAX - 1], diag2[2 * MAX - 1];
+static bool col[MAX], diag1[2 * MAX - 1], diag2[2 * MAX - 1];   // 퀸이 놓아지는 경우 되지 못하는 열, 대각선들을 체크해 두는 것임
 
 inline void init() {
     cin >> n;
