@@ -4,61 +4,50 @@
 
 using namespace std;
 
-#if 0
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+static int N = 1000000;
+static vector<int> v;
+static vector<int> dp;
 
-    int N;
-    cin >> N;
+int solution1(){
+    int res = 0;
 
-    vector<int> arr(N);
-    vector<int> dp(N, 1);   // dp[i]: i까지의 최대 부분 수열 길이
-    int max_len = 1;
-
-    for (int i = 0; i < N; i++) {
-        cin >> arr[i];
-    }   
-
-    for (int i = 1; i < N; i++) {   // 갱신될 최대 부분 수열 길이 
-        for (int j = 0; j < i; j++) {
-            if (arr[j] < arr[i]) {
+    dp.assign(N, 1);
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < i; j++){
+            if(v[j] < v[i])
                 dp[i] = max(dp[i], dp[j] + 1);
-            }
         }
-        max_len = max(max_len, dp[i]);
+        res = max(res, dp[i]);
     }
 
-    cout << max_len << "\n";
+    return res;
+} 
 
-    return 0;
+int solution2(){
+    vector<int> res;
+    
+    for(const auto &i: v){
+        if(res.empty() || i > res.back())
+            res.push_back(i);
+        else{
+            int idx = lower_bound(res.begin(), res.end(), i) - res.begin(); // 크거나 같은 첫번째 반환
+            res[idx] = i;
+        }
+    }
+
+    return res.size();
 }
-#endif
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    int N;
+int main(int argc, char *argv[]){
     cin >> N;
-
-    vector<int> lis;
-
-    for (int i = 0; i < N; i++) {
-        int num;
-        cin >> num;
-
-        // 크면 뒤에 이어 붙임
-        if (lis.empty() || lis.back() < num) {
-            lis.push_back(num);
-        } 
-        else {  // 작거나 같으면 -> 현재 정렬된 상태니까 크거나 같은 젤 앞에거 찾아서 바꿔버림 -> 작게 바꿀수록 뒤에 큰걸 앞 if에 걸릴 확률이 늘어나니까
-            auto it = lower_bound(lis.begin(), lis.end(), num);
-            *it = num; 
-        }
+    int input;
+    for(int i = 0; i < N; i++)
+    {
+        cin >> input;
+        v.push_back(input);
     }
 
-    cout << lis.size() << "\n";
+    cout << solution2() << endl;
 
     return 0;
 }
